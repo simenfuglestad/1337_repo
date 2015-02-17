@@ -17,6 +17,7 @@ gruppe = {  'student1': 'Simen Tokerud',
             'student6': 'Jørgen Haraldseid Gramstad'
 }
 
+
 # Assignment 1
 
 # Function that prints out a bird
@@ -48,6 +49,7 @@ def bitAnd(x, y):
 # Returns the result.
 def bitXor(x, y):
 	return x ^ y
+
 
 # Assignment 4
 
@@ -87,8 +89,8 @@ def transferHex(string):
 		hexes += result + '\n'
 	return hexes
 
-# Assingment 8
 
+# Assingment 8
 
 def unicodeBin(character):
     conv = unicode(character, 'UTF-8')
@@ -96,12 +98,11 @@ def unicodeBin(character):
     
 # Assignment 9
 
-# Tilgjengelighet avhenger av root user. Kan hente info fra prosesser som kjører fra din brukers tilgang.
-# Mange (de fleste operativsystemer) gjemmer info om seg selv.
-# PSutil kan finne harddrive capacity, minne (RAM), antall CPUer.
+# Availability depends on the root user. Can retrieve info from processes running from your user's access.
+# Most operating systems hides information about themselves.
+# PSUtils can find hard drive capacity, memory (RAM), number of CPUs and so on.
 
-
-
+# A function to check what CPU, memory and disk(s) you have on your computer.
 def printSysInfo():
     cpu = psutil.NUM_CPUS
     memory = psutil.virtual_memory().total
@@ -112,7 +113,9 @@ def printSysInfo():
     return specs
     
 
-
+# Tests   
+    
+# A test to check what CPU, memory and disk(s) you have on your computer.
 def sysInfoTest():
     cpu = psutil.NUM_CPUS
     memory = psutil.virtual_memory().total
@@ -122,6 +125,7 @@ def sysInfoTest():
     return "test completed"
 
 
+# Some tests to check if things work as planned.
 def test():
 	assert bitAnd(6, 5) == 4
 	assert bitXor(4, 5) == 1
@@ -131,9 +135,9 @@ def test():
 	assert transferBin('Hi') == "01001000\n01101001\n"
 	assert transferHex('Hei') == "0x48\n0x65\n0x69\n"				
 	assert unicodeBin('å') == '11100101'
-	# Dine egne tester
+	# Your own tests.
 	return "Testene er fullført uten feil."
 
 
-# Bruk denne funksjonen for å vise at alle testene er kjørt feilfritt
+# Use this function to check that all the tests returns no errors.
 print test()
