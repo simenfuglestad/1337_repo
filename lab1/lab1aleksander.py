@@ -1,16 +1,17 @@
 # -*- coding: utf8 -*-
 
 #
-#  IS-105 LAB1
+# IS-105 LAB1
 #
 
+# Import librarys to get different functions.
 import sys
 import psutil
 
 # Alle gruppemedlemmene
 
 gruppe = {  'student1': 'Simen Tokerud',
-			'student2': 'Andreas Ougland',
+            'student2': 'Andreas Ougland',
             'student3': 'Simen Fuglestad',
             'student4': 'Stefan Blomberg',
             'student5': 'Aleksander Aspevik',
