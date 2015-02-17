@@ -67,9 +67,9 @@ DETTE MÅ VI ORDNE!!!
 lab1-svar.txt 
 Det er en del begreper her, som det er sterkt ønskelig at dere blir bedre kjent med på egen hånd. I flere laboppgaver vil dere finne en deloppgave “hva er det?”, hvor dere blir bedt om å søke selv opp definisjoner på begreper og handlinger. Ukens begreper og handlinger er: 
 		❏  operatørprioritet in Python (http://docs.python.org/2/reference/expressions.html#operator-precedence)  
-		❏  one’s complement (http://en.wikipedia.org/wiki/Ones'_complement)  
-		❏  passer et reservert ord i Python, hva er dets funksjon?  
-		❏  finn ut hva hver eneste linje av kode betyr og beskriv det i besvarelsen  Søk på selv på WWW (eller andre kilder, hvis aktuelt) og skriv ned korte definisjoner på disse begrepene og handlingene. Ikke gi deg før du har funnet ut hva det er!  
+		❏  one’s complement (http://en.wikipedia.org/wiki/Ones'_complement)
+		❏  pass er et reservert ord i Python, hva er dets funksjon?
+		❏  finn ut hva hver eneste linje av kode betyr og beskriv det i besvarelsen. Søk på selv på WWW (eller andre kilder, hvis aktuelt) og skriv ned korte definisjoner på disse begrepene og handlingene. Ikke gi deg før du har funnet ut hva det er!  
 		
-2) Alle definisjoner fra oppgave 2 skal skrives i en tekstfil med navn lab1-svar.txt  
+2) Alle definisjoner fra oppgave 2 skal skrives i en tekstfil med navn lab1-svar.txt.
 		
