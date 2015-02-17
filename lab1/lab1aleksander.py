@@ -20,7 +20,7 @@ gruppe = {  'student1': 'Simen Tokerud',
 
 # Assignment 1
 
-# Function that prints out a bird
+# Function that prints out an ascii-bird
 def ascii_bird():
 	bird = """
 	       \/_
