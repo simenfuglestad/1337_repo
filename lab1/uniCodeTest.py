@@ -4,21 +4,21 @@ def ascii8Bin(letter):
 	result = ord(letter)
 	return '{0:08b}'.format(letter)
 
-
-
 def unicodeBin(character):
-    conv = unicode(character, 'UTF-8')
-    return ascii8Bin(conv)
+
+    outstr = ""
+    unicode_char = bytearray(character)
+    
+    if len(unicode_char) > 1:
+        for char in bytearray(unicode_char):
+            outstr += "{0:08b} ".format(char)
+    
+    else:
+        outstr = "{0:08b}".format(ord(character))
+    
+    return outstr
 
 
-def unicodeBin2(character):
-    result = bytearray(character)
-    string = ""
-    for c in result:
-        c = unicode(character, 'UTF-8')
-        string += string + c
-    return ascii8Bin(result)
+print unicodeBin("å")
 
-
-print unicodeBin2("å")
 
