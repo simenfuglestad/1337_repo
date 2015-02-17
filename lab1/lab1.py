@@ -115,7 +115,7 @@ print unicodeBin("å")
 # Most operating systems hides information about themselves.
 # PSUtils can find hard drive capacity, memory (RAM), number of CPUs and so on.
 
-# A function to check what CPU, memory and disk(s) you have on your computer.
+# A function to check the status of the CPU, virtual memory and disk(s) you have on your computer.
 def printSysInfo():
     cpu = psutil.NUM_CPUS
     memory = psutil.virtual_memory().total
@@ -128,7 +128,7 @@ def printSysInfo():
 
 # Tests   
     
-# A test to check what CPU, memory and disk(s) you have on your computer.
+# A test to check the status of the CPU, virtual memory and disk(s) on your computer.
 def sysInfoTest():
     cpu = psutil.NUM_CPUS
     memory = psutil.virtual_memory().total
