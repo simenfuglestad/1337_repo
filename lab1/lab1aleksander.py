@@ -70,10 +70,9 @@ def ascii8Bin(letter):
 # Assignment 6 
 
 def transferBin(string): 
-	l = list(string)
+	l = list(string)  # Creates a list named "l" wich consists of strings.
 	binaries = ""
-	for c in l:
-		# Print the binary representation of each character. (use your ascii8Bin function)
+	for c in l:  # Print the binary representation of each character. (use your ascii8Bin function)
 		result = ascii8Bin(c)
 		binaries += result + '\n'
 	return binaries
