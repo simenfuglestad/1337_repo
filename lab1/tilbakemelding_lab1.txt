@@ -1,0 +1,56 @@
+Kommentar til lab1-svar.py
+
+Jeg får feilmelding under kjøring av filen. 
+Husk for de neste innleveringene, - alle filene dere leverer fra dere må kunne kjøres uten feilmeldinger.
+
+lab1-svar.py er ikke et bra navn for en fil i Python.
+'-' bør ikke brukes i filnavn, siden filen kan da ikke kalles opp hverken fra andre filer eller fra Python-shell (med import som module).
+Se https://www.python.org/dev/peps/pep-0008 (kodestil for Python) for mer informasjon.
+
+Hvem som har levert denne oppgaven? 
+Navn må spesifiseres i dict-strukturen gruppe.
+Jeg vet at dere har hatt endringer i deres gruppe.
+Vennligst ta kontakt med meg for å avklare hvordan denne oppgaven skal evalueres og hvordan dere har tenkt å organisere GitHub repositorier videre.
+
+
+Oppgave 1
+Bruk print med "escape" her. """doc""" brukes for å dokumentere funksjoner.
+
+
+Oppgave 2-4
+OK, mangler deres kommentarer.
+
+
+Oppgave 5
+OK, mangler deres kommentater.
+
+
+Oppgave 6
+Korrekt implementer, slik som spesifisert i kravspesifikasjonen. 
+Mangler kommentarer / forklaringer (se laboppgaven).
+
+
+Oppgave 7
+I denne oppgaven kunne dere eksperimentert med format funksjonen. 
+hex funksjonen kan også brukes, men da burde dere beskrive den detaljert og hvorfor dere valget den.
+Hva blir forskjell på å bruke hex og å bruke format?
+Ser at dere har skrevet testene selv, bra!
+
+
+Oppgave 8
+assert unicodeBin('å') == '11100101' fungerer ikke og er ikke korrekt formulert.
+Det som unicodeBin('å') skal returnere er 'c3a5' i hex og '11000011 10100101' binært.
+Deres kode returnerer "unicode code point", ikke representasjon av unicode karakterer på en platform.
+Viktig å forstå her hvordan utf-8 koding fungerer http://infohost.nmt.edu/tcc/help/pubs/python/web/utf-8.html
+
+
+Oppgave 9
+Finner ingen besvarelse. 
+Finner heller ingen tekstfil hvor spørsmål fra laboppgaven er drøftet.
+
+
+Vennlige tips:
+Vennligst prøv å holde dere GitHub repository ryddig.
+Det er mulig å opprette flere kontoer på GitHub for eksperimenter.
+Se på hvilke muligheter som ligger i gitignore, da slipper dere å ha "backup"-filer i repositorien (de som ender på ~)
+Kuk og vagina er greit for min del, men husk at dette blir deres eksamensinnlevering og at en sensor skal eventuelt se på det, så velg ord og uttrykk som egner seg for denne konteksten:)
