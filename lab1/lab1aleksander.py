@@ -8,8 +8,7 @@
 import sys
 import psutil
 
-# Alle gruppemedlemmene
-
+# All groupmembers in the 1337 group.
 gruppe = {  'student1': 'Simen Tokerud',
             'student2': 'Andreas Ougland',
             'student3': 'Simen Fuglestad',
@@ -18,7 +17,7 @@ gruppe = {  'student1': 'Simen Tokerud',
             'student6': 'Jørgen Haraldseid Gramstad'
 }
 
-# Oppgave 1
+# Assignment 1
 
 # Function that prints out a bird
 def ascii_bird():
@@ -35,7 +34,7 @@ def ascii_bird():
 ascii_bird()
 
 
-# Oppgave 2
+# Assignment 2
 
 # Function that does a bitwise AND operation on two numbers.
 # Returns the result
@@ -43,21 +42,21 @@ def bitAnd(x, y):
 	return x & y
 
 
-# Oppgave 3
+# Assignment 3
 
 # Function that does a bitwise XOR operation on two numbers.
 # Returns the result.
 def bitXor(x, y):
 	return x ^ y
 
-# Oppgave 4
+# Assignment 4
 
 # Function that does a bitwise OR operation on two numbers and returns the result
 def bitOr(x, y):
 	return x | y
 
 
-# Oppgave 5
+# Assignment 5
 
 # Function that takes a letter, transforms it into to decimal number and then
 # turns it into a bit-number.
@@ -66,19 +65,19 @@ def ascii8Bin(letter):
 	return '{0:08b}'.format(result)
 
 
-# Oppgave 6 
+# Assignment 6 
 
 def transferBin(string): 
 	l = list(string)
 	binaries = ""
 	for c in l:
-		# skriv ut den binære representasjon av hvert tegn (bruk ascii8Bin funksjonen din)
+		# Print the binary representation of each character. (use your ascii8Bin function)
 		result = ascii8Bin(c)
 		binaries += result + '\n'
 	return binaries
 	
 
-# Oppave 7
+# Assignment 7
 
 def transferHex(string):
 	l = list(string)
@@ -88,14 +87,14 @@ def transferHex(string):
 		hexes += result + '\n'
 	return hexes
 
-# Oppgave 8
+# Assingment 8
 
 
 def unicodeBin(character):
     conv = unicode(character, 'UTF-8')
     return ascii8Bin(conv)    
     
-# Oppgave 9
+# Assignment 9
 
 # Tilgjengelighet avhenger av root user. Kan hente info fra prosesser som kjører fra din brukers tilgang.
 # Mange (de fleste operativsystemer) gjemmer info om seg selv.
