@@ -95,6 +95,7 @@ def unicodeBin(character):
     conv = unicode(character, 'UTF-8')
     return ascii8Bin(conv)    
     
+    
 # Assignment 9
 
 # Availability depends on the root user. Can retrieve info from processes running from your user's access.
