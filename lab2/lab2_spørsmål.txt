@@ -1,0 +1,16 @@
+1.  En av forskjellene på romerske og arabiske tall er at romerske tall i prinsippet
+	blir plusset sammen for å finne ut hvilket tall det er. For eksempel tallet tolv
+	skrives på den arabiske måten som: 12, mens med romerske tall skrives det: 
+	XII (10 + 1 + 1). Hadde man gjort dette med det latinske tallet 12 ville man fått 3.
+	
+	Et annet viktig aspekt er at plasseringen av tallene har noe å si for hva det endelige
+	tallet blir. For eksempel i stedet for å uttrykke tallet 4 på denne måten: IIII, så 
+	lagde de et system som gjorde at dersom et større tall kommer etter et mindre tall
+	så trekkes det mindre tallet fra det store tallet. Dette gjør at 4 skrives slik: IV.
+	Et annet eksempel er 59 som kan skrives: LIX, hvor L er 50, og at I-en foran X-en gjør
+	at summen av IX er 9 (50 + 9 = 59).
+	
+	I tillegg hadde ikke romerne et tall for 0 (men de hadde det latinske ordet 'nulla' 
+	som betyr ingen/ingenting, men ingen skriftlige tegn for å uttrykke dette).
+	
+2.  Svares på når jeg har fiksa linux på ny pc.
