@@ -5,11 +5,11 @@
 #
 
 # Import librarys to get different functions.
-import sys
-import psutil
+import sys  # Import functions from the sys library.
+import psutil  # Import functions from the psutil library.
 
 # All groupmembers in the 1337 group.
-gruppe = {  'student1': 'Simen Tokerud',
+gruppe = {  'student1': 'Simen Tokerud',  # Creates a group of students.
             'student2': 'Andreas Ougland',
             'student3': 'Simen Fuglestad',
             'student4': 'Stefan Blomberg',
@@ -21,7 +21,7 @@ gruppe = {  'student1': 'Simen Tokerud',
 # Assignment 1
 
 # Function that prints out an ascii-bird
-def ascii_bird():
+def ascii_bird():  # Creates the definition aschii_bird.
 	bird = """
 	       \/_
 	  \,   /( ,/
@@ -29,9 +29,9 @@ def ascii_bird():
 	    (./
 	     '`
  	    """ 
-	print(bird)
+	print(bird)  # Prints the variable bird.
 
-# Runs the function and prints out the bird
+# Runs the function and prints out the bird.
 ascii_bird()
 
 
