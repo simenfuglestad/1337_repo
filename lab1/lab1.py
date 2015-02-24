@@ -9,7 +9,7 @@ import sys  # Import functions from the sys library.
 import psutil  # Import functions from the psutil library.
 
 # All groupmembers in the 1337 group.
-gruppe = {  'student1': 'Simen Tokerud',  # Creates a group of students.
+gruppe = {  'student1': 'Simen Tokerud',  # Creates a group of students in a dictonary.
             'student2': 'Andreas Ougland',
             'student3': 'Simen Fuglestad',
             'student4': 'Stefan Blomberg',
