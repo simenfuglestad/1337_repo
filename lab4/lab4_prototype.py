@@ -5,8 +5,9 @@ suits = ['spades', 'hearts', "diamonds", "clubs"]
 ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9',
             '10', 'jack', 'queen', 'king']
 
-combination_table = [[0 for x in range(5)] for x in range(5)]
-#print combination_matrix
+#Use suits and ranks to create multidimensional array?
+combination_table = [[0 for x in range(5)] for x in range(2)]
+print combination_table
 
 
 deck_of_cards = [ (a, b) for a in ranks for b in suits ]
@@ -22,7 +23,6 @@ class Deck(object):
         user_input = raw_input("How many players will be playing? > ")
         print ""
         
-        #   Add: Create new player objects here based on input
         
         if user_input.isdigit():
             user_input = int(user_input)
@@ -34,8 +34,11 @@ class Deck(object):
                 exit(0)
  
         for i in range(user_input):
-            print "\nDealing hand number %s\n" % (i + 1)
+            new_player = Player()
+            new_player = "player " + "%s" % (i + 1)  
+            print "\nDealing hand number %s to %s " % ((i + 1), (new_player))
             new_hand = Hand.get_hand(Hand())
+            
     
         
         
