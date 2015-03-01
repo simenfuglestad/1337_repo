@@ -1,0 +1,47 @@
+#TEST FILE
+
+import random
+from sys import exit
+
+suits = ['spades', 'hearts', "diamonds", "clubs"]
+ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9',
+            '10', 'jack', 'queen', 'king']
+
+
+deck_of_cards = [ (a, b) for a in ranks for b in suits ]
+
+class Deck(object):
+
+    def __init__(self, deck):
+        self.deck = deck
+        random.shuffle(deck)
+        print "The deck is shuffled"
+    
+    def get_deck(self):
+        return self.deck
+        
+    
+    def get_hand(hand):
+        user_input = raw_input("How many players will be playing? ")
+        
+        for c in user_input:
+            #make new hand for each player
+            pass
+
+
+
+class Player(object):
+    def __init__(self):
+        pass
+
+
+class Hand(object):
+    def __init__(self):
+        pass
+        
+
+
+
+newDeck = Deck(deck_of_cards)
+newDeck.get_deck()
+
