@@ -1,2 +1,2 @@
-# 1337_repo
-Repository for gruppe '1337'. Her skal kun laboppgaver og tester legges ut.
+# 1337_repo Branch of Simen F
+Test files/prototypes of the Lab assignments, made/edited by SimenF
