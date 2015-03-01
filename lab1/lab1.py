@@ -147,7 +147,7 @@ def test():
 	assert ascii8Bin('A') == '01000001'
 	assert transferBin('Hi') == "01001000\n01101001\n"
 	assert transferHex('Hei') == "0x48\n0x65\n0x69\n"				
-	assert unicodeBin('å') == '11100101'
+	assert unicodeBin('å') == '11000011 10100101'
 	# Your own tests.
 	return "Testene er fullført uten feil."
 
