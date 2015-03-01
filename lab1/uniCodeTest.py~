@@ -1,0 +1,16 @@
+# -*- coding: utf8 -*-
+import unicodedata
+
+def ascii8Bin(letter):
+	result = ord(letter)
+	return '{0:08b}'.format(letter)
+
+
+
+def unicodeBin(character):
+    
+
+def unicodeBin2(character):
+    my_code = unicode(chracter, 'UTF-8')
+    
+    result = unicode
