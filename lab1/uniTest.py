@@ -1,4 +1,6 @@
 # -*- coding: utf8 -*-
+
+#Try the .read(1) in here somwhere...
 import sys
 import struct
 

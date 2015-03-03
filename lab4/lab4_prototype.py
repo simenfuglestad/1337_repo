@@ -34,10 +34,14 @@ class Deck(object):
                 exit(0)
  
         for i in range(user_input):
+            # Really necessary to make player objects?
+            # Edit loop so that hands are dealt, then shown!
             new_player = Player()
             new_player = "player " + "%s" % (i + 1)  
-            print "\nDealing hand number %s to %s " % ((i + 1), (new_player))
+            print "\nDealing hand to %s " % new_player
             new_hand = Hand.get_hand(Hand())
+        
+        #Player().show_hand(new_hand)
             
     
         
