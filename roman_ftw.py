@@ -63,6 +63,19 @@ def from_roman(s):
     return result
 
 
+def add_roman(a, b):
+    """Function to add a roman numeral to another roman numeral without
+    converting to decimal. Returns the result of the addition.
+    """
+    a = a.upper()
+    b = b.upper()
+    a = remove_subtractives_roman(a)
+    b = remove_subtractives_roman(b)
+    result = a + b
+    result = shorten_roman(result)
+    return result
+
+
 def subtract_roman(a, b):
     """Function to subtract a roman numeral from another
     roman numeral without converting to decimal.
@@ -95,8 +108,28 @@ def subtract_roman(a, b):
     return a
 
 
+def divide_roman(a, b):
+    a = a.upper()
+    b = b.upper()
+    a = remove_subtractives_roman(a)
+    b = remove_subtractives_roman(b)
+    quotient = ""
+    remainder = ""
+    while is_greater_equal_roman(a, b):
+        a = subtract_roman(a, b)
+        quotient += "I"
+    remainder = a
+    quotient = shorten_roman(quotient)
+    if remainder is not "":
+        return "Quotient: %r, Remainder: %r." % (quotient,
+                                                remainder)
+    else:
+        return "Quotient: %r, no Remainder." % quotient
+
+
 def remove_subtractives_roman(s):
-    """Removes subtractives from the roman numeral and returns the numeral."""
+    """Removes subtractives from the roman numeral and returns the numeral.
+    """
     while "CM" in s:
         s = s.replace("CM", "DCCCC ", 1)
     while "CD" in s:
@@ -146,16 +179,64 @@ def shorten_roman(p):
 #    print p
     return p
 
-# Testing whether all functions work:
-t1 = to_roman(1115)
-print t1
-t2 = to_roman(200)
-print t2
-t3 = subtract_roman(t1, t2)
-print t3
-t4 = from_roman(t3)
-print t4
-t5 = from_roman("x")
-print t5
-t6 = subtract_roman("xx", "v")
-print t6
+
+def is_greater_equal_roman(a, b):
+    """A function to test whether roman numeral a is greater than b.
+    Returns true is a is greater than b and false if it is not.
+    """
+    a = convert_to_I(a)
+    b = convert_to_I(b)
+    return len(a) >= len(b)
+
+
+def convert_to_I(a):
+    """Converts the roman numeral to Is.
+    Used for comparison purposes.
+    """
+    while "M" in a:
+        a = a.replace("M", "DD", 1)
+    while "D" in a:
+        a = a.replace("D", "CCCCC", 1)
+    while "C" in a:
+        a = a.replace("C", "LL", 1)
+    while "L" in a:
+        a = a.replace("L", "XXXXX", 1)
+    while "X" in a:
+        a = a.replace("X", "VV", 1)
+    while "V" in a:
+        a = a.replace("V", "IIIII", 1)
+    return a
+
+
+def tests():
+    # Testing whether all functions work:
+    # t1 = to_roman(1115)
+    # print t1
+    assert to_roman(1115) == "MCXV"
+    # t2 = to_roman(200)
+    # print t2
+    assert to_roman(200) == "CC"
+    # t3 = subtract_roman(t1, t2)
+    # print t3
+    assert subtract_roman("MCXV", "CC") == "DCCCCXV"
+    # t4 = from_roman(t3)
+    # print t4
+    assert from_roman("DCCCCXV") == 915
+    # t5 = from_roman("x")
+    # print t5
+    assert from_roman("x") == 10
+    # t6 = subtract_roman("xx", "v")
+    # print t6
+    assert subtract_roman("xx", "v") == "XV"
+    # t7 = add_roman("cccc", "d")
+    # print t7
+    assert add_roman("cccc", "d") == "DCCCC"
+    # t8 = divide_roman("cm", "lV")
+    # print t8
+    assert divide_roman("cm", "lv") == "Quotient: 'XVI', Remainder: 'XX'."
+    assert divide_roman("cm", "ix") == "Quotient: 'C', no Remainder."
+    # t9 = is_greater_equal_roman("MM", "M")
+    # print t9
+    assert is_greater_equal_roman("MM", "M") is True
+    return "All tests passed."
+print tests()
