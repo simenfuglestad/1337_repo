@@ -13,4 +13,6 @@
 	I tillegg hadde ikke romerne et tall for 0 (men de hadde det latinske ordet 'nulla' 
 	som betyr ingen/ingenting, men ingen skriftlige tegn for å uttrykke dette).
 	
-2.  Svares på når jeg har fiksa linux på ny pc.
+2.  Operativsystem: CentOS 6.6 (final)
+    Python 2.7.9
+    CPU: Intel i3 2310M @ 2.10GHz
