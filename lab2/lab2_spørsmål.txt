@@ -10,8 +10,8 @@
 	Et annet eksempel er 59 som kan skrives: LIX, hvor L er 50, og at I-en foran X-en gjør
 	at summen av IX er 9 (50 + 9 = 59).
 	
-	I tillegg hadde ikke romerne et tall for 0 (men de hadde det latinske ordet 'nulla' 
-	som betyr ingen/ingenting, men ingen skriftlige tegn for å uttrykke dette).
+	I tillegg hadde ikke romerne et tall for 0, men de hadde det latinske ordet 'nulla' 
+	som betyr ingen/ingenting, men ingen skriftlige tegn for å uttrykke dette.
 	
 2.  Operativsystem: CentOS 6.6 (final)
     Python 2.7.9
