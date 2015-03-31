@@ -35,7 +35,7 @@ class Engine(object):
     def play(self):
         print "The game will now begin\n"
         
-        number_of_players = raw_input("How many players? Min 2 max 5 > ")
+        number_of_players = raw_input("How many players? Min 2 max 5 >")
         print ""    
         
         if number_of_players.isdigit():
@@ -47,15 +47,14 @@ class Engine(object):
                 
                 for i in range(number_of_players):
                     i = i + 1
-                    hand = new_deck.make_hand()
+                    hand = new_deck.get_hand()
                     
                     new_player = Player(i, hand)
                     players.append(new_player)
-                    
-                  
+                
                 for p in players:
-                    Player.evaluate(p)
-                         
+                    Player.evaluate(p)    
+                                    
             else:
                 print "You entered a number less than 2 or greater than 5"
                 exit(0)
@@ -71,7 +70,7 @@ class Deck(object):
         shuffle(deck)
         print "The Deck is shuffled\n"
 
-    def make_hand(self):
+    def get_hand(self):
         hand = ()
         
         for c in range(5):
@@ -83,81 +82,26 @@ class Deck(object):
         
 
 class Player(object):
-    hand_value = 0
     
     def __init__(self, number, hand):
         self.hand = hand
         self.number = number
-        
         print "Player %s has entered the game" % number
         print "______________________________"
         print ""
         
     def evaluate(self):
+        #self.hand = hand
+        #print"%s\n" % self.hand
         
-        ranks = []
-        suits = []
+        found = False
         
-        for card in self.hand:
-            if card[0] == 'jack':
-                ranks.append(11)
-            elif card[0] == 'queen':
-                ranks.append(12)
-            elif card[0] == 'king':
-                ranks.append(13)
-            elif card[0] == 'ace':
-                ranks.append(14)
-            else:
-                ranks.append(int(card[0]))
-                
-            suits.append(card[1])
-        
-        #suits = ['hearts', 'hearts', 'hearts', 'hearts', 'hearts']
-        #ranks = [2, 3, 4, 5, 6]
-        ranks = [2, 2, 2, 2, 2]
-        #print suits
-        #print ranks[0] + 1
-        #print self.hand
-            
-        if all(x == suits[0] for x in suits):
-            print "it's a flush"
-            
-            ranks.sort()
-            i = 0
-            for c in ranks[:-1]:
-                if ranks[i + 1] == ranks[i] + 1:
-                    i += 1
-            if i == 4:
-                #pass
-                print "It's a straight flush"
-            else:
-                return "flush"
-                
-            if ranks[4] == 14:
-                print "It's a royal flush!!!!"
-                return "royal flush"
-            else:
-                return "straight flush"
-        
-        elif all(x == y for x, y in enumerate(ranks, ranks[0])):
-            print "It's a straight"
-            return "straight"
-        
-        elif 
-        
-        elif len(set(ranks[:2])) == 1 and len(set(ranks[3:])) == 1:
-            print "House"
-            return "House"
-        
-        #elif set(ranks) == 2:
-         #   return "four of a kind"
-        
-        #elif set([i for i in ranks if ranks.count(i) == 2]) == 4:
-         #   return "four of a kind"
-                   
-        else:
-            print "test false"
-            print self.hand_value
-            
+        while not found:
+            print self.hand
+            for card in self.hand:
+                print card[1]
+                    
+            found = True
+
 new_game = Engine()
 Engine.play(new_game)

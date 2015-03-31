@@ -1,0 +1,30 @@
+
+
+This is a sketch on how to make the loop for the evaluate()
+function in class Player(object), written in psudo-code
+
+
+if all card in are same suit:
+    flush
+    if cards are in rising order:
+        straight flush
+        if highest card is ace:
+            royal flush
+            
+elif cards are in rising order:
+    straight
+
+elif three cards match:
+    three of a kind
+    if another card match the three:
+        four of a kind
+    
+elif two cards match:
+    pair
+    if two other cards match:
+        two pair
+        if last card matches either pair
+            house
+      
+else:
+    high card
