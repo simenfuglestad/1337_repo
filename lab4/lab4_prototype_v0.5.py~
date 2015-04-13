@@ -61,7 +61,7 @@ class Engine(object):
                         Winner = p
                     else:
                         print "It's a tie"
-                        
+                        exit(0)
                     print p.hand_value
                     print ""
                 
