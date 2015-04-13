@@ -175,7 +175,7 @@ class Player(object):
          #   return "four of a kind"
                    
         else:
-            HC = max(ranks)
+            HC = ranks[4]
             if HC == 11:
                 HC = "Jack"
             elif HC == 12:

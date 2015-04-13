@@ -175,16 +175,7 @@ class Player(object):
          #   return "four of a kind"
                    
         else:
-            HC = max(ranks)
-            if HC == 11:
-                HC = "Jack"
-            elif HC == 12:
-                HC = "Queen"
-            elif HC == 13:
-                HC = "King"
-            elif HC == 14:
-                HC = "Ace"
-            
+            HC = ranks[4]
             print "High Card is %s" % HC
             #print self.hand_value
 
