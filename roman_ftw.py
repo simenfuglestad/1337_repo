@@ -32,6 +32,8 @@ def to_roman(n):
 
 def from_roman(s):
     """Convert a roman numeral to an integer and return the integer."""
+    if not isinstance(s, str):
+        raise NotStringError("You need to input a string.")
     s = s.upper()
     result = 0
     s = remove_subtractives_roman(s)
@@ -64,8 +66,9 @@ def from_roman(s):
 
 
 def add_roman(a, b):
-    """Function to add a roman numeral to another roman numeral without
-    converting to decimal. Returns the result of the addition.
+    """Function for adding a roman numeral
+    to another roman numeral without converting to decimal.
+    Returns the result of the addition.
     """
     a = a.upper()
     b = b.upper()
@@ -77,7 +80,7 @@ def add_roman(a, b):
 
 
 def subtract_roman(a, b):
-    """Function to subtract a roman numeral from another
+    """Function for subtracting a roman numeral from another
     roman numeral without converting to decimal.
     Returns the result of the subtraction.
     """
@@ -108,6 +111,130 @@ def subtract_roman(a, b):
     return a
 
 
+def multiply_roman(a, b):
+    """ Function for multiplying a roman numeral with another
+    roman numeral without converting to decimal.
+    Returns the result of the multiplication.
+    """
+    a = remove_subtractives_roman(a)
+    b = remove_subtractives_roman(b)
+    c = []
+    d = []
+    a = list(a)
+    b = list(b)
+#    print a
+#    print b
+    for element in a:
+        counter = 0
+        while len(b) > counter:
+            c.append(element + b[counter])
+#            print c
+            counter = counter + 1
+    for element in c:
+        if "II" in element:
+            d.append("I")
+        if "VI" in element:
+            d.append("V")
+        if "XI" in element:
+            d.append("X")
+        if "LI" in element:
+            d.append("L")
+        if "CI" in element:
+            d.append("C")
+        if "DI" in element:
+            d.append("D")
+        if "MI" in element:
+            d.append("M")
+        if "IV" in element:
+            d.append("V")
+        if "VV" in element:
+            d.append("XXV")
+        if "XV" in element:
+            d.append("L")
+        if "LV" in element:
+            d.append("CCL")
+        if "CV" in element:
+            d.append("D")
+        if "DV" in element:
+            d.append("MMD")
+        if "MV" in element:
+            d.append("MMMMM")
+        if "IX" in element:
+            d.append("X")
+        if "VX" in element:
+            d.append("L")
+        if "XX" in element:
+            d.append("C")
+        if "LX" in element:
+            d.append("X")
+        if "CX" in element:
+            d.append("M")
+        if "DX" in element:
+            d.append("MMMMM")
+        if "MX" in element:
+            d.append("ERROR!")
+        if "IL" in element:
+            d.append("L")
+        if "VL" in element:
+            d.append("CCL")
+        if "XL" in element:
+            d.append("D")
+        if "CL" in element:
+            d.append("MMMMM")
+        if "DL" in element:
+            d.append("ERROR!")
+        if "ML" in element:
+            d.append("ERROR!")
+        if "IC" in element:
+            d.append("C")
+        if "VC" in element:
+            d.append("D")
+        if "XC" in element:
+            d.append("M")
+        if "LC" in element:
+            d.append("MMMMM")
+        if "CC" in element:
+            d.append("ERROR!")
+        if "DC" in element:
+            d.append("ERROR!")
+        if "MC" in element:
+            d.append("ERROR!")
+        if "ID" in element:
+            d.append("D")
+        if "VD" in element:
+            d.append("MMD")
+        if "XD" in element:
+            d.append("MMMMM")
+        if "LD" in element:
+            d.append("ERROR!")
+        if "CD" in element:
+            d.append("ERROR!")
+        if "DD" in element:
+            d.append("ERROR!")
+        if "MD" in element:
+            d.append("ERROR!")
+        if "IM" in element:
+            d.append("M")
+        if "VM" in element:
+            d.append("MMMMM")
+        if "XM" in element:
+            d.append("ERROR!")
+        if "LM" in element:
+            d.append("ERROR!")
+        if "CM" in element:
+            d.append("ERROR!")
+        if "DM" in element:
+            d.append("ERROR!")
+        if "MM" in element:
+            d.append("ERROR!")
+    if "ERROR!" in d:
+        return "The result is a number which is too large to handle!"
+    "".join(d)
+    d = sort_roman(d)
+    d = shorten_roman(d)
+    return d
+
+
 def divide_roman(a, b):
     a = a.upper()
     b = b.upper()
@@ -122,7 +249,7 @@ def divide_roman(a, b):
     quotient = shorten_roman(quotient)
     if remainder is not "":
         return "Quotient: %r, Remainder: %r." % (quotient,
-                                                remainder)
+                                                 remainder)
     else:
         return "Quotient: %r, no Remainder." % quotient
 
@@ -238,5 +365,11 @@ def tests():
     # t9 = is_greater_equal_roman("MM", "M")
     # print t9
     assert is_greater_equal_roman("MM", "M") is True
+    assert multiply_roman("XX", "CX") == "MMCC"
+    assert multiply_roman("I", "I") == "I"
+    assert multiply_roman("M", "V") == "MMMMM"
+    assert multiply_roman("C", "L") == "MMMMM"
+    assert multiply_roman("III", "XXX") == "LXXXX"
+    assert multiply_roman("XXX", "III") == "LXXXX"
     return "All tests passed."
 print tests()
