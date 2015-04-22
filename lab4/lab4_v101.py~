@@ -70,12 +70,13 @@ class Engine(object):
                     print ""
                     if Winner.hand_value == p.hand_value:
                         if Winner.get_high_card(i) < p.get_high_card(i):
+                            i = i - 1
                             Winner = p
                             break
                         elif Winner.hand == p.hand:
                             print "The game is tied between player%s and player%s" % (Winner.number, p.number)
                             exit(1)
-                    i = i - 1   
+                       
                    
                 Winner.is_winner()
                          
@@ -133,7 +134,8 @@ class Player(object):
         if not ranks:
             return 0
         else:
-            #print ranks    
+            print ranks
+            print self.number    
             return ranks[index]
         
     def evaluate(self):
