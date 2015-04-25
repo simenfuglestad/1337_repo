@@ -8,18 +8,6 @@ from sys import exit
 suits = ['spades', 'hearts', "diamonds", "clubs"]
 ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9',
             '10', 'jack', 'queen', 'king']
-
-combinations = {
-                'High Card'         : 0,
-                'Pair'              : 1,
-                'Two-pair'          : 2,
-                'Three of a kind'   : 3,
-                'Straight'          : 4,
-                'Flush'             : 5,
-                'Full House'        : 6,
-                'Four of a kind'    : 7,
-                'Straight flush'    : 8,
-                'Royal flush'       : 9 }
                 
 deck_of_cards = [ (a, b) for a in ranks for b in suits ]
 
@@ -72,9 +60,9 @@ class Engine(object):
                         if Winner.get_high_card(i) < p.get_high_card(i):
                             i = i - 1
                             Winner = p
-                            #break
                         elif Winner.hand == p.hand:
-                            print "The game is tied between player%s and player%s" % (Winner.number, p.number)
+                            print "The game is tied between player%s" \
+                            "and player%s" % (Winner.number, p.number)
                             exit(1)
                        
                    
@@ -157,26 +145,24 @@ class Player(object):
                 
             suits.append(card[1])
             ranks.sort()
-            #ranks = [2, 2, 2, 2, 6]
-        #print suits
-        #print ranks[0] + 1
-        #print self.hand
             
         if all(x == suits[0] for x in suits):
-            print "it's a flush"
+            print "It's a flush"
              
             i = 0
             for c in ranks[:-1]:
                 if ranks[i + 1] == ranks[i] + 1:
                     i += 1
             if i == 4:
-                #pass
                 print "It's a straight flush"
+            elif ranks == [2, 3, 4, 5, 14]:
+                print "It'a straight flush with ace"
+                return 8
             else:
                 return 5
                 
             if ranks[4] == 14:
-                print "It's a royal flush!!!!"
+                print "It's a royal flush!!!!" 
                 return 9
             else:
                 return 8
@@ -187,11 +173,11 @@ class Player(object):
         
         elif ranks == [2, 3, 4, 5, 14]:
             print "It's a straight"
-            return 14
+            return 4
         
         elif set(x for x in ranks if ranks.count(x) >= 3):
             if set(y for y in ranks if ranks.count(y) == 2):
-                print "House"
+                print "It's a House"
                 return 6
             elif len(set(ranks)) == 3:
                 print "Three of a kind"
@@ -206,14 +192,52 @@ class Player(object):
         
         elif len(set(ranks)) == 4:
             print "One pair"
-            return 1   
+            return 1
     
         else:
             HC = max(ranks)
-            #print ranks
             print "High Card: %s" % HC
             return 0
-            #print self.hand_value
 
 new_game = Engine()
 Engine.play(new_game)
+
+def test():
+    assert Player(0, (('4', 'diamonds'), ('5', 'diamonds'), ('king', 'hearts'),
+        ('ace', 'spades'), ('jack', 'clubs'))).evaluate() == 0
+        
+    assert Player(1, (('4', 'diamonds'), ('4', 'spades'), ('king', 'hearts'),
+        ('ace', 'spades'), ('jack', 'clubs'))).evaluate() == 1
+        
+    assert Player(2, (('4', 'diamonds'), ('4', 'spades'), ('king', 'hearts'),
+        ('ace', 'spades'), ('king', 'clubs'))).evaluate() == 2
+        
+    assert Player(3, (('4', 'diamonds'), ('4', 'spades'), ('4', 'hearts'),
+        ('ace', 'spades'), ('king', 'clubs'))).evaluate() == 3
+    
+    assert Player(4, (('4', 'diamonds'), ('5', 'spades'), ('6', 'hearts'),
+        ('7', 'spades'), ('8', 'clubs'))).evaluate() == 4
+    
+    assert Player(4, (('ace', 'diamonds'), ('2', 'spades'), ('3', 'hearts'),
+        ('4', 'spades'), ('5', 'clubs'))).evaluate() == 4
+        
+    assert Player(5, (('ace', 'spades'), ('2', 'spades'), ('3', 'spades'),
+        ('4', 'spades'), ('jack', 'spades'))).evaluate() == 5
+    
+    assert Player(6, (('ace', 'spades'), ('ace', 'hearts'), ('3', 'spades'),
+        ('3', 'spades'), ('3', 'spades'))).evaluate() == 6
+    
+    assert Player(7, (('ace', 'spades'), ('ace', 'hearts'), ('ace', 'diamonds'),
+        ('ace', 'clubs'), ('3', 'spades'))).evaluate() == 7
+    
+    assert Player(8, (('2', 'hearts'), ('3', 'hearts'), ('4', 'hearts'),
+        ('5', 'hearts'), ('6', 'hearts'))).evaluate() == 8
+    
+    assert Player(8, (('ace', 'hearts'), ('2', 'hearts'), ('3', 'hearts'),
+        ('4', 'hearts'), ('5', 'hearts'))).evaluate() == 8
+    
+    assert Player(9, (('10', 'hearts'), ('jack', 'hearts'), ('queen', 'hearts'),
+        ('king', 'hearts'), ('ace', 'hearts'))).evaluate() == 9
+    
+    print "Test Complete"
+#test()
