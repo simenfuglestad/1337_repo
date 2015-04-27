@@ -153,5 +153,5 @@ def test():
 	return "Testene er fullført uten feil."
 
 
-# Use this function to check that all the tests returns no errors
+# Use this function to check that all the tests returns no errors.
 print test()
