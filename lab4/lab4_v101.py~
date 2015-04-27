@@ -67,7 +67,6 @@ class Engine(object):
                        
                    
                 Winner.is_winner()
-                return Winner()
                          
             else:
                 print "You entered a number less than 2 or greater than 5"
@@ -200,8 +199,8 @@ class Player(object):
             print "High Card: %s" % HC
             return 0
 
-new_game = Engine()
-Engine.play(new_game)
+#new_game = Engine()
+#Engine.play(new_game)
 
 def test():
     assert Player(0, (('4', 'diamonds'), ('5', 'diamonds'), ('king', 'hearts'),
@@ -228,7 +227,7 @@ def test():
     assert Player(6, (('ace', 'spades'), ('ace', 'hearts'), ('3', 'spades'),
         ('3', 'spades'), ('3', 'spades'))).evaluate() == 6
     
-    assert Player(7, (('ace', 'spades'), ('ace', 'hearts'), ('ace', 'diamonds'),
+    assert Player(7, (('ace', 'spades'), ('ace', 'hearts'), ('ace', 'clubs'),
         ('ace', 'clubs'), ('3', 'spades'))).evaluate() == 7
     
     assert Player(8, (('2', 'hearts'), ('3', 'hearts'), ('4', 'hearts'),
@@ -237,8 +236,8 @@ def test():
     assert Player(8, (('ace', 'hearts'), ('2', 'hearts'), ('3', 'hearts'),
         ('4', 'hearts'), ('5', 'hearts'))).evaluate() == 8
     
-    assert Player(9, (('10', 'hearts'), ('jack', 'hearts'), ('queen', 'hearts'),
-        ('king', 'hearts'), ('ace', 'hearts'))).evaluate() == 9
+    assert Player(9, (('10', 'clubs'), ('jack', 'clubs'), ('queen', 'clubs'),
+        ('king', 'clubs'), ('ace', 'clubs'))).evaluate() == 9
     
     print "Test Complete"
-#test()
+test()
