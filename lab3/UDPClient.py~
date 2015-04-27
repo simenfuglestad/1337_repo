@@ -1,8 +1,7 @@
 # -*- utf-8 -*-
 
 from socket import *
-from socket import socket
-serverName = socket.gethostbyname(socket.gethostname()) #'192.168.1.180'
+serverName = '158.37.243.90'
 serverPort = 12000
 clientSocket = socket(AF_INET, SOCK_DGRAM)
 
