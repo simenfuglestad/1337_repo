@@ -149,7 +149,7 @@ def test():
 	assert transferHex('Hei') == "0x48\n0x65\n0x69\n"				
 	assert unicodeBin('å') == '11000011 00100000 10100101'
 	# Your own tests.
-	return "Testene er fullført uten feil."
+	return "Tests ran with no errors."
 
 
 # Use this function to check that all the tests returns no errors.
