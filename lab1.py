@@ -150,7 +150,7 @@ def test():
 	assert unicodeBin('å') == '1100001110100101'
 	assert unicodeBin('ø') == '1100001110111000'
 	# Your own tests.
-	return "Testene er fullført uten feil."
+	return "Tests completed with no errors."
 
 
 # Use this function to check that all the tests returns no errors.
