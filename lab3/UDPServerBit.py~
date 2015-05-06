@@ -1,9 +1,5 @@
-# -*- utf-8 -*-
+# -*-coding: utf-8 -*-
 #from binascii import *
-
-def ascii8Bin(letter):
-	result = ord(letter)
-	return '{0:08b}'.format(result)
 
 def unicodeBin(character):
 
@@ -18,7 +14,7 @@ def unicodeBin(character):
         outstr = "{0:08b}".format(ord(character))
     
     outstr = outstr.replace(" ", "")
-    return outstr.encode('utf_8')
+    return outstr
 
 from socket import*
 serverPort = 12000
@@ -29,24 +25,19 @@ while 1:
     message, clientAdress = serverSocket.recvfrom(2048)
     #modifiedMessage = message.upper()
     #modifiedMessage = message.decode('UTF-8').upper().encode('UTF-8')
-    temp = []
-    for c in message:
-        binary_list = list(unicodeBin(c))
-        if binary_list[2] == '1':
-            binary_list[2] = '0'
-        elif binary_list[2] == '0':
-            binary_list[2] == '1'
-        binary_list = ''.join(binary_list)
-        print binary_list
-        
-        temp.append(binary_list)
-    print temp
-    result = []
-    for b in temp:
-        b = int(b, 2)
-        result.append(unichr(b))
-        print unichr(b)
-    print result
-    serverSocket.sendto(message, clientAdress)
     
+    binaries = []
+    for c in message:
+        binaries.append(unicodeBin(c))
+    
+    for b in binaries:
+        b = int(b)
+        #print b
+        
+    #print binaries
+    result = unicodeBin(message)
+    print result
+    result = ('%x' % int(result, 2)).decode('hex')
+    
+    serverSocket.sendto(message, clientAdress)
     

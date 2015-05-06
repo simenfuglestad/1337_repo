@@ -5,6 +5,13 @@ from sys import exit
 #   Suit and ranks in separate lists then use double for loop to generate
 #   list of tuples
 
+#NOTE TO SELF: CALL ALL THE FUCNTIONS IN PLAY!
+#def play(self):
+#   start()
+#   deal()
+#   getWinner()
+#   osv
+#osv
 suits = ['spades', 'hearts', "diamonds", "clubs"]
 ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9',
             '10', 'jack', 'queen', 'king']
@@ -14,11 +21,40 @@ deck_of_cards = [ (a, b) for a in ranks for b in suits ]
 players = []
 
 
-class Engine(object):
+class Game(object):
     
     def __init__(self):
         pass
- 
+    
+    def start(self):
+        print "The game will now begin\n"
+        
+        number_of_players = raw_input("How many players? Min 2 max 5 > ")
+        print ""    
+        
+        if number_of_players.isdigit():
+            number_of_players = int(number_of_players)
+            if 1 < number_of_players < 6:
+                print "%s players will attend the game\n" % number_of_players
+                deal()
+            else:
+                print "You entered a number less than 2 or greater than 5"
+                exit(1)
+        else:
+            print "Must enter a valid number higher than 2 and lower than 5"
+            exit(1)
+    
+    def deal(self):
+        new_deck = Deck(deck_of_cards)
+                
+        for i in range(number_of_players):
+            i = i + 1
+            hand = new_deck.make_hand()
+                    
+            new_player = Player(i, hand)
+            players.append(new_player)
+        play()   
+    
     def play(self):
         print "The game will now begin\n"
         
@@ -74,6 +110,8 @@ class Engine(object):
         else:
             print "Must enter a valid number higher than 2 and lower than 5"
             exit(1)
+    def getWinner(self):
+        pass
         
 class Deck(object):   
 
@@ -97,13 +135,14 @@ class Player(object):
     def __init__(self, number, hand):
         self.hand = hand
         self.number = number
-        
-        print "Player %s has entered the game" % number
-        print "______________________________"
         print ""
+        print "Player %s has entered the game" % number
+        print "------------------------------"
+        #print ""
     
     def is_winner(self):
         print "The winner is player %s" % self.number
+        return self
     
     def get_high_card(self, index):
         ranks = []
@@ -199,8 +238,8 @@ class Player(object):
             print "High Card: %s" % HC
             return 0
 
-#new_game = Engine()
-#Engine.play(new_game)
+#new_game = Game()
+#Game.play(new_game)
 
 def test():
     assert Player(0, (('4', 'diamonds'), ('5', 'diamonds'), ('king', 'hearts'),
