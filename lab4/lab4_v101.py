@@ -24,7 +24,7 @@ deck_of_cards = [ (a, b) for a in ranks for b in suits ]
 players = []
 
 # The 'Game' class is the main class of the program. Game contains the method
-# for starting a game of poker and the algorythm for determining which player
+# for starting a game of poker and the algorithm for determining which player
 # wins the game.
 
 class Game(object):
@@ -39,7 +39,7 @@ class Game(object):
     
     # play() serves as the entry point of the program as it starts and handles
     # the game itself. 
-    # Play contains the algorythms for creating player objects, 
+    # Play contains the algorithms for creating player objects, 
     # creating a deck object, dealing hands and determining tiebreakers. 
     # play() utilizies evaluate from the Player class to determine the hand
     # values of the different players. play() also uses isWinner from the class
@@ -88,7 +88,7 @@ class Game(object):
                 
                 # Here we loop thorugh the list 'players' and set each
                 # player's hand_value to be equal a number returned from 
-                # evaluate. The algorythm is set up so that if the loop
+                # evaluate. The algorithm is set up so that if the loop
                 # encounters a hand_value greater than what is found in
                 # 'Winner', then Winner is assigned to be that Player object.
                 # See the 'readme.txt' for more extensive info.
@@ -239,14 +239,13 @@ class Player(object):
             print self.number    
             return ranks[index]
     
-    # evalutate() contains the main algorythms for determining a player's
+    # evalutate() contains the main algorithms for determining a player's
     # 'hand_value'. It is setup as an eliminary sequence starting with every
-    # combinations that involve all suits being equal and ending with
+    # combination that involve all suits being equal and ending with
     # high card. Returns a value between 0-9 which represents all the possible
     # combinations in poker, where 0 is high-card and 9 is royal flush. Note
-    # that some combinations are inclusive of others
-    # and therefore some return statements are placed AFTER checking for all
-    # possible combinations.
+    # that some combinations are inclusive of others and therefore some return
+    # statements are placed AFTER checking for all possible combinations.
         
     def evaluate(self):
         
@@ -272,7 +271,7 @@ class Player(object):
             suits.append(card[1])
             ranks.sort()
         
-        # First step in algorythm: Determine if flush.
+        # First step in algorithm: Determine if flush.
             
         if all(x == suits[0] for x in suits):
             

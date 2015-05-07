@@ -1,18 +1,18 @@
 # -*-encoding: utf-8 -*-
 
-#   Importing functions from socket and the Json library
+# Importing functions from socket and the Json library
 
 from socket import *
 import json
 from sys import *
 
-#   The client will send to localhost IP
-#   Selecting serverport. Port number must not be in use.
+# The client will send to localhost IP
+# Selecting serverport. Port number must not be in use.
 serverName = 'localhost'
 serverPort = 12000
 clientSocket = socket(AF_INET, SOCK_DGRAM)
 
-#   Get input from the user
+# 
 
 def getInput():
     done = False
