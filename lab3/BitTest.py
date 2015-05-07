@@ -15,17 +15,6 @@ def unicodeBin(character):
     
     outstr = outstr.replace(" ", "")
     return outstr
-    
-def getInput():
-    done = False
-    output_list = []
-    while not done:
-        user_input = raw_input("Enter letter: ")
-        if not user_input:
-            done = True
-        else:
-            output_list.append(user_input)
-    return output_list
         
 
 
@@ -78,6 +67,6 @@ while 1:
     print message
     message = json.loads(message)
     flip = flipBit(message)
-    message = binaryToCharacter(flip)
-    serverSocket.sendto(message, clientAdress)    
+    new_message = binaryToCharacter(flip)
+    serverSocket.sendto(new_message, clientAdress)    
 
