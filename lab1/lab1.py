@@ -1,3 +1,4 @@
+
 # -*- coding: utf8 -*-
 
 #
@@ -97,16 +98,15 @@ def unicodeBin(character):
     unicode_char = bytearray(character)
     
     if len(unicode_char) > 1:
-        for char in unicode_char:
+        for char in bytearray(unicode_char):
             outstr += "{0:08b} ".format(char)
     
     else:
         outstr = "{0:08b}".format(ord(character))
     
-    return outstr
+    outstr = outstr.replace(" ", "") # takes away the space between the binary numbers
+    return outstr.encode('utf_8')
 
-
-print unicodeBin("å")
     
     
 # Assignment 9
@@ -147,9 +147,10 @@ def test():
 	assert ascii8Bin('A') == '01000001'
 	assert transferBin('Hi') == "01001000\n01101001\n"
 	assert transferHex('Hei') == "0x48\n0x65\n0x69\n"				
-	assert unicodeBin('å') == '11000011 00100000 10100101'
+	assert unicodeBin('å') == '1100001110100101'
+	assert unicodeBin('ø') == '1100001110111000'
 	# Your own tests.
-	return "Tests ran with no errors."
+	return "Tests completed with no errors."
 
 
 # Use this function to check that all the tests returns no errors.
