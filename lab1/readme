@@ -1,0 +1,20 @@
+Name, version, description, and/or features of the program.
+Group 1337 - Lab01 (v.0.721)
+Answers to all the questions in Lab01.
+
+System requirements.
+Minimum python 2.X. Python 2.7 recommended.
+Should run on all computers.
+
+Install, uninstall, configuration, and operating instructions.
+Compile the lab01.py file and run it.
+
+Files list.
+*lab1.py
+*readme.md
+
+Credit, acknowledgments, contact information, and copyright.
+Made by Group 1337 for the IS-105 course at UIA, 2nd semester, 2015.
+
+Known bugs and a change log.
+No known bugs at the moment.
