@@ -30,9 +30,9 @@ players = []
 class Game(object):
     
     # The __init__ of class game does not execute any methods. We chose this
-    # because it is more compliant with OO structure in the way it gives us control
-    # over when to call the method play(), as opposed to simply executing play()
-    # every time we instanciate a game class. 
+    # because it is more compliant with OO structure in the way it gives us
+    # control over when to call the method play(), as opposed to simply
+    # executing play() every time we instanciate a game class. 
     
     def __init__(self):
         pass

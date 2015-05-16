@@ -49,6 +49,10 @@ def flipBits(binaries):
                 b[1] = '0'
             b = ''.join(b)
             outlist.append(b)
+        else:
+            print "Uknown symbol"
+            print "Exiting..."
+            exit(0)
             
     return outlist
     
@@ -74,7 +78,7 @@ def test():
     assert binToChar(['1000001']) == 'A'
     assert binToChar(['1100001110100101']) == 'å'
     assert binToChar(['1100001110000101']) == 'Å'
-    return "All tests completed, programming running normally"
+    return "All tests completed, program running normally"
 
 # Import all data from the socket module, set up a serverport and bind it to a 
 # socket. 

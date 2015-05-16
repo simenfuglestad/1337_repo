@@ -1,6 +1,6 @@
 # -*-encoding: utf-8 -*-
 
-# Importing functions from socket and the Json library
+# Importing functions from socket, sys and the Json library
 
 from socket import *
 import json
