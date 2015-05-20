@@ -3,10 +3,10 @@
 
 Contributors and members of the group
 
-Simen Tokerud
-Jørgen Haralseid Gramstad
-Alexander Aspevik
-Stefan Blomberg
-Simen Fuglestad
+Simen Tokerud,
+Jørgen Haralseid Gramstad,
+Alexander Aspevik,
+Stefan Blomberg,
+Simen Fuglestad,
 Andreas Ougland
 
