@@ -42,7 +42,7 @@ def get_input():
                 return [number, "DTR"]
             else:
                 print "You must enter a valid decimal number"
-                print "Exiting..."
+                print "Exitiing..."
                 exit(0)
                 
         elif user_input == "2":
