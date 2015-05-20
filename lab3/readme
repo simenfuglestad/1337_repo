@@ -1,22 +1,30 @@
 Name, version, description, and/or features of the program:
 Group 1337 - Lab03 (v.)
-Answers to all the questions in Lab03.
+Solutions to programming problems in lab03
 
 System requirements:
 Minimum python 2.X. Python 2.7 recommended.
 Should run on all computers.
 
 How to run:
-.....
+
+Open two terminals, run the server-side of your chosen application with 
+'python exampleserver.py' and then run the corresponding client-side with 
+'python exampleclient.py'. Proceed  by following user instructions provided
+in the applications.
 
 Files list:
 *UDPClient.py
 *UDPServer.py
+*binary_manipulation_server.py
+*binary_manipulation_client.py
+*romanUDPserver.py
+*romanUDPclient.py
+*roman.py
 *readme.md
 
-Credit, acknowledgments, contact information, and copyright:
+Credit, acknowledgments:
 Made by Group 1337 for the IS-105 course at UIA, 2nd semester, 2015.
-If you want to contact us, you know where to find us.
 
-Known bugs and a change log:
-No known bugs at the moment.
+Known bugs and issues:
+No known bugs or issues at the moment.

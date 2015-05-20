@@ -1,226 +1,409 @@
-#CS 212, hw1-1: 7-card stud
-#
-# -----------------
-# User Instructions
-#
-# Write a function best_hand(hand) that takes a seven
-# card hand as input and returns the best possible 5
-# card hand. The itertools library has some functions
-# that may help you solve this problem.
-#
-# -----------------
-# Grading Notes
-#
-# Muliple correct answers will be accepted in cases
-# where the best hand is ambiguous (for example, if
-# you have 4 kings and 3 queens, there are three best
-# hands: 4 kings along with any of the three queens).
+# NOTE: Read 'OO' as Object oriented
 
-import itertools
+from random import randint
+from random import shuffle
+from sys import exit
 
-def best_hand(hand):
-    "From a 7-card hand, return the best 5 card hand."
-    return max(itertools.combinations(hand, 5), key=hand_rank)
+# First step is to set up a deck. To do this we first make two lists, one for 
+# suits and one for ranks. 
 
-# ------------------
-# Provided Functions
-#
-# You may want to use some of the functions which
-# you have already defined in the unit to write
-# your best_hand function.
+suits = ['spades', 'hearts', "diamonds", "clubs"]
+ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9',
+            '10', 'jack', 'queen', 'king']
+                
+# To complete the deck we use list comprehension to create a new list of
+# tuples. The tuples in the list is comprised of each element in a and b
+# added in unique combinations.
+deck_of_cards = [ (a, b) for a in ranks for b in suits ]
 
-def hand_rank(hand):
-	"Return a value indicating the ranking of a hand."
-	ranks = card_ranks(hand)
-	if straight(ranks) and flush(hand):
-		return (8, max(ranks))
-	elif kind(4, ranks):
-		return (7, kind(4, ranks), kind(1, ranks))
-	elif kind(3, ranks) and kind(2, ranks):
-		return (6, kind(3, ranks), kind(2, ranks))
-	elif flush(hand):
-		return (5, ranks)
-	elif straight(ranks):
-		return (4, max(ranks))
-	elif kind(3, ranks):
-		return (3, kind(3, ranks), ranks)
-	elif two_pair(ranks):
-		return (2, two_pair(ranks), ranks)
-	elif kind(2, ranks):
-		return (1, kind(2, ranks), ranks)
-	else:
-		return (0, ranks)
+# The empty list 'players' is used later in the program for a variety of
+# purposes. While it does not comply with the OO structure of the rest of
+# the program it does not break any functionality and make the program 
+# easier to read.
 
-def card_ranks(hand):
-	"""Return a list of the ranks, sorted with higher first."""
-	ranks = ['--23456789TJQKA'.index(r) for r, s in hand]
-	ranks.sort(reverse = True)
-	return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
+players = []
 
-def flush(hand):
-    "Return True if all the cards have the same suit."
-    suits = [s for r,s in hand]
-    return len(set(suits)) == 1
+# The 'Game' class is the main class of the program. Game contains the method
+# for starting a game of poker and the algorithm for determining which player
+# wins the game.
 
-def straight(ranks):
-	"""Return True if the ordered
-	ranks form a 5-card straight."""
-	return (max(ranks)-min(ranks) == 4) and len(set(ranks)) == 5
+class Game(object):
+    
+    # The __init__ of class game does not execute any methods. We chose this
+    # because it is more compliant with OO structure in the way it gives us
+    # control over when to call the method play(), as opposed to simply
+    # executing play() every time we instanciate a game class. 
+    
+    def __init__(self):
+        pass
+    
+    # play() serves as the entry point of the program as it starts and handles
+    # the game itself. 
+    # Play contains the algorithms for creating player objects, 
+    # creating a deck object, dealing hands and determining tiebreakers. 
+    # play() utilizies evaluate from the Player class to determine the hand
+    # values of the different players. play() also uses isWinner from the class
+    # Player() to determine the winner.
+      
+    def play(self):
+        print "The game will now begin\n"
+        
+        # We added an semi-arbitrary minimum and maximum amount of players for 
+        # the game to make sense to be played at all. Also a low maximum 
+        # ensures that the deck Object does not run out of cards.
+        
+        number_of_players = raw_input("How many players? Min 2 max 5 > ")
+        print ""    
+        
+        # We perform a check it the entered number of players is actually an
+        # integer and the if it matches our criteria for min and max players
+        
+        if number_of_players.isdigit():
+            number_of_players = int(number_of_players)
+            if 1 < number_of_players < 6:
+                print "%s players will attend the game\n" % number_of_players
+                
+                # Here we create a new deck Object using our list of tuples as 
+                # a parameter. See the Deck class for more info.
+                
+                new_deck = Deck(deck_of_cards)
+                
+                # Based on the previous raw_input we create a number of new
+                # player objects and add them to our empty and aforementioned
+                # list 'players'. Players are given a number i and a hand as
+                # parameteres. See the Player class for more info on the
+                # parameteres and the Deck class for more info on make_hand()
+                
+                for i in range(number_of_players):
+                    i = i + 1
+                    hand = new_deck.make_hand()
+                    
+                    new_player = Player(i, hand)
+                    players.append(new_player)
+                
+                # To begin the process of determining which Player is the 
+                # winner we first create a new Player object 'Player 0'..
+                    
+                Winner = Player(0, ())
+                
+                # Here we loop thorugh the list 'players' and set each
+                # player's hand_value to be equal a number returned from 
+                # evaluate. The algorithm is set up so that if the loop
+                # encounters a hand_value greater than what is found in
+                # 'Winner', then Winner is assigned to be that Player object.
+                # See the 'readme.txt' for more extensive info.
+                
+                for p in players:
+                    print p.hand                    
+                    p.hand_value = Player.evaluate(p)
+                    
+                    if p.hand_value > Winner.hand_value:
+                        Winner = p
+                    
+                    print ""
+                
+                # After determining which Player has the highest hand value
+                # we need to ensure that no other Player object has an equal
+                # hand value to that of the Winner. To do this we must loop
+                # over the remaning Player objects in 'players' and compare 
+                # them to 'Winner'. Since we must avoide to compare 'Winner' 
+                # to itself we must delete the corresponding Player object
+                # before starting the loop.
+                    
+                if Winner in players:
+                    players.remove(Winner)
+                
+                # For the process of checking for and then getting the
+                # tiebreaker we again loop through the list of Players and
+                # this time compare the hand value to 'Winner''s hand_value.
+                # If there's a match we perform the method get_high_card()
+                # to determine which player is the Winner. get_high_card()
+                # is performed a number of times equal to the number of cards
+                # in a hand, using 'i' as a control variable to determine 
+                # the index of the cards that are being compared. If all the
+                # get_high_card() exectuions match then the game is determined
+                # a tie and the program exits.
+                         
+                i = 4    
+                for p in players:
+                    print ""
+                    if Winner.hand_value == p.hand_value:
+                        if Winner.get_high_card(i) < p.get_high_card(i):
+                            i = i - 1
+                            Winner = p
+                        elif Winner.hand == p.hand:
+                            print "The game is tied between player%s" \
+                            "and player%s" % (Winner.number, p.number)
+                            exit(1)
+                
+                # Finaly after ensuring we have the right Player object as a
+                # 'Winner', we call is_winner() from the Player class to
+                # print a simple string showing the user which player that won
+                # the game.      
+                   
+                Winner.is_winner()
+            
+            # This else clause is executed if the user enters an invalid 
+            # number afer starting the game.
+                         
+            else:
+                print "You entered a number less than 2 or greater than 5"
+                exit(1)
+        # This else clause is executed if the user enters a non-integer value
+        # after starting the game.s
+        
+        else:
+            print "Must enter a valid number higher than 2 and lower than 5"
+            exit(1)
 
-def kind(n, ranks):
-	"""Return the first rank that this hand has
-    exactly n-of-a-kind of. Return None if there
-	is no n-of-a-kind in the hand."""
-	for r in ranks:
-		if ranks.count(r) == n: return r
-	return None
+# The deck class serves as a means of instanciating new deck objects and
+# also holds a method for creating hands of cards.
+      
+class Deck(object):   
+    
+    # The __init__ of deck takes a single parameter (aside from obliagtory 
+    # 'self') named 'deck'. In the play() method we pass deck as the list of 
+    # tuples created in the beginning of the program. Furthermore the deck is
+    # shuffled and a short message is printed to the user.
+    
+    def __init__(self, deck):
+        self.deck = deck
+        shuffle(deck)
+        print "The Deck is shuffled\n"
+    
+    # The make_hand method selects 5 random cards (tuples) from a Deck object
+    # and puts them together in a tuple of tuples. Then it removes the
+    # selected card from the deck so that it can't be picked again.
+    
+    def make_hand(self):
+        hand = ()
+        
+        for c in range(5):
+            r = randint(0, len(self.deck) - 1)
+            hand = hand + (self.deck[r],)
+            deck_of_cards.remove(self.deck[r])
+        return hand
 
-def two_pair(ranks):
-	"""If there are two pair here, return the two
-	ranks of the two pairs, else None."""
-	pair = kind(2, ranks)
-	lowpair = kind(2, list(reversed(ranks)))
-	if pair and lowpair != pair:
-		return (pair, lowpair)
-	else:
-		return None
+# The Player class is responsible for creating Player objects that will attend
+# the game and holds a number of methods related to getting the hand_value and
+# determining which player is the winner. Every player object has a variable
+# 'hand_value' which always defaults to zero but is utlimatly changed during
+# the play() of class Game.
+        
+class Player(object):
+    hand_value = 0
+    
+    # Player objects take 2 paramteres, 'number' and 'hand'. 'number' provides
+    # an easy way to keep track of players while hand is the tuple of tuples
+    # that is the player's hand of cards/
+    
+    def __init__(self, number, hand):
+        self.hand = hand
+        self.number = number
+        print ""
+        print "Player %s has entered the game" % number
+        print "------------------------------"
+    
+    # This short method returns a string with the 'number' param attached
+    # to it. Used by play() in class Game to show the user which player that
+    # won the game. 
+    
+    def is_winner(self):
+        print "The winner is player %s" % self.number
+        return self
+    
+    # This method is used in the case that two players have equal 'hand_value'
+    # and must decide by high_card. An empty list 'ranks' is instanciated
+    # and then each card in the Players hand is added to it. String names
+    # are replaced with integer values to match their value. Returns a number
+    # in ranks speicified by the index parameter.
+    
+    def get_high_card(self, index):
+        ranks = []
+        for card in self.hand:
+            if card[0] == 'jack':
+                ranks.append(11)
+            elif card[0] == 'queen':
+                ranks.append(12)
+            elif card[0] == 'king':
+                ranks.append(13)
+            elif card[0] == 'ace':
+                ranks.append(14)
+            else:
+                ranks.append(int(card[0]))
+        ranks.sort()
+        if not ranks:
+            return 0
+        else:  
+            return ranks[index]
+    
+    # evalutate() contains the main algorithms for determining a player's
+    # 'hand_value'. It is setup as an eliminary sequence starting with every
+    # combination that involve all suits being equal and ending with
+    # high card. Returns a value between 0-9 which represents all the possible
+    # combinations in poker, where 0 is high-card and 9 is royal flush. Note
+    # that some combinations are inclusive of others and therefore some return
+    # statements are placed AFTER checking for all possible combinations.
+        
+    def evaluate(self):
+        
+        ranks = []
+        suits = []
+        
+        # Replace string values in hand with integers corresponding to their
+        # value the append them to 'ranks' and 'suits' respectively. Ranks
+        # are then sorted.
+        
+        for card in self.hand:
+            if card[0] == 'jack':
+                ranks.append(11)
+            elif card[0] == 'queen':
+                ranks.append(12)
+            elif card[0] == 'king':
+                ranks.append(13)
+            elif card[0] == 'ace':
+                ranks.append(14)
+            else:
+                ranks.append(int(card[0]))
+                
+            suits.append(card[1])
+            ranks.sort()
+        
+        # First step in algorithm: Determine if flush.
+            
+        if all(x == suits[0] for x in suits):
+            
+            # Second step: Determine if straight flush.
+            
+            i = 0
+            for c in ranks[:-1]:
+                if ranks[i + 1] == ranks[i] + 1:
+                    i += 1
+            if i == 4:
+                print "It's a straight flush"
+                return 8
+            elif ranks == [2, 3, 4, 5, 14]:
+                print "It'a straight flush with ace"
+                return 8
+            
+            else:
+                print "It's a flush"
+                return 5
+            
+            # Third step: Determine if royal flush    
+                
+            if ranks[4] == 14:
+                print "It's a royal flush!!!!" 
+                return 9
+                
+            # Here we return straght flush if royal flush fails. We do this
+            # since straight flush is an inclusive combination of Royal flush.
+            else:
+                return 8
+        
+        # Fourth step: Determine if straight. 
+        elif all(x == y for x, y in enumerate(ranks, ranks[0])):
+            print "It's a straight"
+            return 4
+        
+        # We want a straight with lower ace to count as well and add it
+        # separatly.
+        
+        elif ranks == [2, 3, 4, 5, 14]:
+            print "It's a straight"
+            return 4
+        
+        # Fifth step: Determine if house. We do this by splitting up the ranks
+        # in equal sets and the count the sets.
+        
+        elif set(x for x in ranks if ranks.count(x) >= 3):
+            if set(y for y in ranks if ranks.count(y) == 2):
+                print "It's a House"
+                return 6
+                
+            # Sixth step: Determine if three of a kind 
+            # We use the inforamtion already gathered from a negative testing
+            # for and test the length of the sets to match three of a kind.            
+                        
+            elif len(set(ranks)) == 3:
+                print "Three of a kind"
+                return 3
+            
+            # Seventh setp: Determine if Four of a kind
+            # Like the sixth step we use the data of the previous checks
+            # and can conlude with the result being four of a kind.            
+            
+            else:
+                print "Four of a kind"
+                return 7
+        
+        # Eigth step: Determine if Two Pairs.
+        # Same conept as with house: Makes sets out of ranks and test the
+        # length of the sets to match.
+        
+        elif len(set(ranks)) == 3:
+            print "Two pairs"
+            return 2
+        
+        # Ninth step: Detemine if One Pair
+        # Again expanding upon previous assertions and test the length of the
+        # sets to match one pair.
+        
+        elif len(set(ranks)) == 4:
+            print "One pair"
+            return 1
+        
+        # Tenth step: Deterimine if High Card.
+        # Since all other possible combinations have been tested this far
+        # the only remaining outcome is high card.
+        
+        else:
+            HC = max(ranks)
+            print "High Card: %s" % HC
+            return 0
 
-def test_best_hand():
-    assert (sorted(best_hand("6C 7C 8C 9C TC 5C JS".split()))
-            == ['6C', '7C', '8C', '9C', 'TC'])
-    assert (sorted(best_hand("TD TC TH 7C 7D 8C 8S".split()))
-            == ['8C', '8S', 'TC', 'TD', 'TH'])
-    assert (sorted(best_hand("JD TC TH 7C 7D 7S 7H".split()))
-            == ['7C', '7D', '7H', '7S', 'JD'])
-    return 'test_best_hand passes'
+new_game = Game()
+Game.play(new_game)
 
-print test_best_hand()
+# The test() function asserts wheter evaluate() returns the proper value based
+# on tuples mathcing the criteria of the value.
 
-"""Homework 2:"""
-
-# CS 212, hw1-2: Jokers Wild
-#
-# -----------------
-# User Instructions
-#
-# Write a function best_wild_hand(hand) that takes as
-# input a 7-card hand and returns the best 5 card hand.
-# In this problem, it is possible for a hand to include
-# jokers. Jokers will be treated as 'wild cards' which
-# can take any rank or suit of the same color. The
-# black joker, '?B', can be used as any spade or club
-# and the red joker, '?R', can be used as any heart
-# or diamond.
-#
-# The itertools library may be helpful. Feel free to
-# define multiple functions if it helps you solve the
-# problem.
-#
-# -----------------
-# Grading Notes
-#
-# Muliple correct answers will be accepted in cases
-# where the best hand is ambiguous (for example, if
-# you have 4 kings and 3 queens, there are three best
-# hands: 4 kings along with any of the three queens).
-
-import itertools
-
-## Deck adds two cards:
-## '?B': black joker; can be used as any black card (S or C)
-## '?R': red joker; can be used as any red card (H or D)
-
-allranks = '23456789TJQKA'
-redcards = [r+s for r in allranks for s in 'DH']
-blackcards = [r+s for r in allranks for s in 'SC']
-
-def best_wild_hand(hand):
-    "Try all values for jokers in all 5-card selections."
-    hands = set(best_hand(h)
-                for h in itertools.product(*map(replacements, hand)))
-    return max(hands, key=hand_rank)
-
-def replacements(card):
-    """Return a list of the possible replacements for a card.
-    There will be more than 1 only for wild cards."""
-    if card == '?B': return blackcards
-    elif card == '?R': return redcards
-    else: return [card]
-
-def best_hand(hand):
-    "From a 7-card hand, return the best 5 card hand."
-    return max(itertools.combinations(hand, 5), key=hand_rank)
-
-def test_best_wild_hand():
-    assert (sorted(best_wild_hand("6C 7C 8C 9C TC 5C ?B".split()))
-            == ['7C', '8C', '9C', 'JC', 'TC'])
-    assert (sorted(best_wild_hand("TD TC 5H 5C 7C ?R ?B".split()))
-            == ['7C', 'TC', 'TD', 'TH', 'TS'])
-    assert (sorted(best_wild_hand("JD TC TH 7C 7D 7S 7H".split()))
-            == ['7C', '7D', '7H', '7S', 'JD'])
-    return 'test_best_wild_hand passes'
-
-# ------------------
-# Provided Functions
-#
-# You may want to use some of the functions which
-# you have already defined in the unit to write
-# your best_hand function.
-
-def hand_rank(hand):
-    "Return a value indicating the ranking of a hand."
-    ranks = card_ranks(hand)
-    if straight(ranks) and flush(hand):
-        return (8, max(ranks))
-    elif kind(4, ranks):
-        return (7, kind(4, ranks), kind(1, ranks))
-    elif kind(3, ranks) and kind(2, ranks):
-        return (6, kind(3, ranks), kind(2, ranks))
-    elif flush(hand):
-        return (5, ranks)
-    elif straight(ranks):
-        return (4, max(ranks))
-    elif kind(3, ranks):
-        return (3, kind(3, ranks), ranks)
-    elif two_pair(ranks):
-        return (2, two_pair(ranks), ranks)
-    elif kind(2, ranks):
-        return (1, kind(2, ranks), ranks)
-    else:
-        return (0, ranks)
-
-def card_ranks(hand):
-    "Return a list of the ranks, sorted with higher first."
-    ranks = ['--23456789TJQKA'.index(r) for r, s in hand]
-    ranks.sort(reverse = True)
-    return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
-
-def flush(hand):
-    "Return True if all the cards have the same suit."
-    suits = [s for r,s in hand]
-    return len(set(suits)) == 1
-
-def straight(ranks):
-    """Return True if the ordered
-    ranks form a 5-card straight."""
-    return (max(ranks)-min(ranks) == 4) and len(set(ranks)) == 5
-
-def kind(n, ranks):
-    """Return the first rank that this hand has
-    exactly n-of-a-kind of. Return None if there
-    is no n-of-a-kind in the hand."""
-    for r in ranks:
-        if ranks.count(r) == n: return r
-    return None
-
-def two_pair(ranks):
-    """If there are two pair here, return the two
-    ranks of the two pairs, else None."""
-    pair = kind(2, ranks)
-    lowpair = kind(2, list(reversed(ranks)))
-    if pair and lowpair != pair:
-        return (pair, lowpair)
-    else:
-        return None
-
-print test_best_wild_hand()
+def test():
+    assert Player(0, (('4', 'diamonds'), ('5', 'diamonds'), ('king', 'hearts'),
+        ('ace', 'spades'), ('jack', 'clubs'))).evaluate() == 0
+        
+    assert Player(1, (('4', 'diamonds'), ('4', 'spades'), ('king', 'hearts'),
+        ('ace', 'spades'), ('jack', 'clubs'))).evaluate() == 1
+        
+    assert Player(2, (('4', 'diamonds'), ('4', 'spades'), ('king', 'hearts'),
+        ('ace', 'spades'), ('king', 'clubs'))).evaluate() == 2
+        
+    assert Player(3, (('4', 'diamonds'), ('4', 'spades'), ('4', 'hearts'),
+        ('ace', 'spades'), ('king', 'clubs'))).evaluate() == 3
+    
+    assert Player(4, (('4', 'diamonds'), ('5', 'spades'), ('6', 'hearts'),
+        ('7', 'spades'), ('8', 'clubs'))).evaluate() == 4
+    
+    assert Player(4, (('ace', 'diamonds'), ('2', 'spades'), ('3', 'hearts'),
+        ('4', 'spades'), ('5', 'clubs'))).evaluate() == 4
+        
+    assert Player(5, (('ace', 'spades'), ('2', 'spades'), ('3', 'spades'),
+        ('4', 'spades'), ('jack', 'spades'))).evaluate() == 5
+    
+    assert Player(6, (('ace', 'spades'), ('ace', 'hearts'), ('3', 'spades'),
+        ('3', 'spades'), ('3', 'spades'))).evaluate() == 6
+    
+    assert Player(7, (('ace', 'spades'), ('ace', 'hearts'), ('ace', 'clubs'),
+        ('ace', 'clubs'), ('3', 'spades'))).evaluate() == 7
+    
+    assert Player(8, (('2', 'hearts'), ('3', 'hearts'), ('4', 'hearts'),
+        ('5', 'hearts'), ('6', 'hearts'))).evaluate() == 8
+    
+    assert Player(8, (('ace', 'hearts'), ('2', 'hearts'), ('3', 'hearts'),
+        ('4', 'hearts'), ('5', 'hearts'))).evaluate() == 8
+    
+    assert Player(9, (('10', 'clubs'), ('jack', 'clubs'), ('queen', 'clubs'),
+        ('king', 'clubs'), ('ace', 'clubs'))).evaluate() == 9
+    
+    print "Test Complete"
+#test()

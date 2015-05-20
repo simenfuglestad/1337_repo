@@ -7,15 +7,14 @@ Minimum python 2.X. Python 2.7 recommended.
 Should run on all computers.
 
 How to run:
-Compile the lab01.py file and run it.
+Open a termina with python interpreter installed and run python 'lab1.py'
 
 Files list:
 *lab1.py
 *readme.md
 
-Credit, acknowledgments, contact information, and copyright:
+Credit and acknowledgments
 Made by Group 1337 for the IS-105 course at UIA, 2nd semester, 2015.
-If you want to contact us, you know where to find us.
 
-Known bugs and a change log:
-No known bugs at the moment.
+Issues and bugs
+No known bugs or issues at the moment.

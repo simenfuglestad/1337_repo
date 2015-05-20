@@ -17,23 +17,20 @@ roman_numeral_map = (('M',  1000),
 def to_roman(n):
     """Converts an integer to a Roman numeral and returns the numeral."""
     if not isinstance(n, int):
-        raise NotIntegerError("decimals can not be converted.")
-    if not (0 < n < 5000):
-        raise OutOfRangeError("number out of range (must be 1... 5000")
+        raise ValueError("decimals can not be converted.")
 
     result = ""
     for numeral, integer in roman_numeral_map:
         while n >= integer:
             result += numeral
             n -= integer
-#    print result
     return result
 
 
 def from_roman(s):
     """Convert a roman numeral to an integer and return the integer."""
     if not isinstance(s, str):
-        raise NotStringError("You need to input a string.")
+        raise TypeError("You need to input a string.")
     s = s.upper()
     result = 0
     s = remove_subtractives_roman(s)
@@ -61,7 +58,6 @@ def from_roman(s):
             result += 1
             s = s.replace("I", "", 1)
 
-#    print result
     return result
 
 
@@ -107,7 +103,6 @@ def subtract_roman(a, b):
             if "V" in a:
                 a = a.replace("V", "IIIII", 1)
     a = shorten_roman(a)
-#    print a
     return a
 
 
@@ -122,13 +117,12 @@ def multiply_roman(a, b):
     d = []
     a = list(a)
     b = list(b)
-#    print a
-#    print b
+
     for element in a:
         counter = 0
         while len(b) > counter:
             c.append(element + b[counter])
-#            print c
+
             counter = counter + 1
     for element in c:
         if "II" in element:
@@ -269,10 +263,8 @@ def remove_subtractives_roman(s):
         s = s.replace("IX", "VIIII ", 1)
     while "IV" in s:
         s = s.replace("IV", "IIII ", 1)
-#    print s
     while " " in s:
         s = s.replace(" ", "", 1)
-#    print s
     return s
 
 
@@ -303,7 +295,6 @@ def shorten_roman(p):
         p = p.replace("CCCCC", "D", 1)
     while 2 * "D" in p:
         p = p.replace("DD", "M", 1)
-#    print p
     return p
 
 
@@ -372,5 +363,4 @@ def tests():
     assert multiply_roman("III", "XXX") == "LXXXX"
     assert multiply_roman("XXX", "III") == "LXXXX"
     return "All tests passed."
-print tests()
-
+#print tests()

@@ -92,20 +92,17 @@ def transferHex(string):
 
 # Assingment 8
 
-def unicodeBin(character):
+def charToBin(character):
+    
+    output = ""
+    
+    for c in character:
+        n = ord(c)
+        b = "{0:0b}".format(n)
+        output += b
+    print output    
+    return output
 
-    outstr = ""
-    unicode_char = bytearray(character)
-    
-    if len(unicode_char) > 1:
-        for char in bytearray(unicode_char):
-            outstr += "{0:08b} ".format(char)
-    
-    else:
-        outstr = "{0:08b}".format(ord(character))
-    
-    outstr = outstr.replace(" ", "") # takes away the space between the binary numbers
-    return outstr.encode('utf_8')
 
     
     
@@ -147,8 +144,8 @@ def test():
 	assert ascii8Bin('A') == '01000001'
 	assert transferBin('Hi') == "01001000\n01101001\n"
 	assert transferHex('Hei') == "0x48\n0x65\n0x69\n"				
-	assert unicodeBin('å') == '1100001110100101'
-	assert unicodeBin('ø') == '1100001110111000'
+	assert charToBin('å') == '1100001110100101'
+	assert charToBin('ø') == '1100001110111000'
 	# Your own tests.
 	return "Tests completed with no errors."
 
