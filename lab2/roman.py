@@ -16,8 +16,6 @@ roman_numeral_map = (('M',  1000),
 
 def to_roman(n):
     """Converts an integer to a Roman numeral and returns the numeral."""
-    if not isinstance(n, int):
-        raise ValueError("decimals can not be converted.")
 
     result = ""
     for numeral, integer in roman_numeral_map:
@@ -29,8 +27,6 @@ def to_roman(n):
 
 def from_roman(s):
     """Convert a roman numeral to an integer and return the integer."""
-    if not isinstance(s, str):
-        raise TypeError("You need to input a string.")
     s = s.upper()
     result = 0
     s = remove_subtractives_roman(s)
